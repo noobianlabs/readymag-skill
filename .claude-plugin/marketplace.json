@@ -1,0 +1,17 @@
+{
+  "name": "readymag-skill",
+  "owner": { "name": "Noobian Labs" },
+  "metadata": {
+    "description": "The Readymag skill for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "readymag",
+      "source": "./",
+      "description": "Teaches Claude how Readymag really works: tablet and phone layouts, scroll animations, hover on touch screens, safe editing in the editor, publishing and domains.",
+      "version": "1.0.0",
+      "category": "design"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "readymag",
+  "version": "1.0.0",
+  "description": "Teaches Claude how Readymag really works: tablet and phone layouts, scroll animations, hover on touch screens, safe editing in the my.readymag.com editor, publishing and domains.",
+  "author": { "name": "Noobian Labs" },
+  "homepage": "https://github.com/noobianlabs/readymag-skill",
+  "repository": "https://github.com/noobianlabs/readymag-skill",
+  "license": "MIT",
+  "keywords": ["readymag", "website", "design", "editor"]
+}
