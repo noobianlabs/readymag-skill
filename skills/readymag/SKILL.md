@@ -16,6 +16,13 @@ Core working principle: **read the project model for facts, verify with
 screenshots and real input.** Runtime DOM geometry lies (see Verification
 rules), and every editor mistake is expensive — assume there is no undo.
 
+This skill is agent-neutral. It needs an agent that can (a) load this
+`SKILL.md` and its `references/`, (b) drive a browser that is signed in to
+`my.readymag.com` and can run page JavaScript, take screenshots, and send
+real input for editing/verification, and (c) optionally drive an iOS
+Simulator. The skill does not install or grant that browser access; you
+provide it.
+
 ## Settled engine facts
 
 | Fact | Consequence |
@@ -74,10 +81,13 @@ w.save({z: 358}, {patch: true});                          // ❌ returns success
 stacking in the Layers panel by dragging — each drag moves the row **one slot**
 regardless of drop distance. A background element must be **last** in the group.
 
-**Before any write:** capture the old values and download them as JSON via
-`new Blob([...])` + `a.download` + `a.click()` (console output truncates, and
-the JS-tool content guard blocks results containing query strings — print only
-scalar fields). Rehearse novel write patterns on a duplicate project first.
+**Before any write:** save the old values as a complete JSON backup using your
+integration's supported file-export or browser-download mechanism, then verify
+the file exists and is readable. Large console output may truncate; some
+integrations filter fields containing query strings. Do not bypass tool guards.
+Use scalar summaries for inspection. Rehearse novel write patterns on a
+duplicate project first. If backup or mutation tools are unavailable, provide
+manual steps rather than claiming an edit was made.
 
 ## Editor UI recipes
 
@@ -153,7 +163,7 @@ Useful preview selectors: `article.page`, `.rmwidget`, `.content-bounds`,
 | "Two boxes in a custom-code pop-up don't line up" | Usually one side is centred (letterboxed media) and the other pinned to the bottom (`margin-top:auto`). Measure the media's leftover gap first and give the text column the same `margin-bottom`. Re-check with a screenshot, and note the window size: a resize changes which side is the limiting one |
 | "Canvas `fontBoundingBoxAscent` gives me the cap offset" | Not for Readymag's custom fonts: canvas reported a 32-px content area where the page renders 37.3, leaving titles ~3 px low. Read the baseline in the page (zero-size `inline-block`, `vertical-align:baseline` marker prepended to the `<p>`) and take only the glyph height from canvas `actualBoundingBoxAscent` |
 | "I'll nudge the pop-up title up with a negative margin" | If its column is `overflow:auto` the letters get clipped. Move the column (its margin) and give it `padding-top` headroom instead. Readymag titles mix sizes inside one `<p>` (first-line span bigger than the paragraph): measure the first text node's own element, not the `<p>` |
-| "Claude in Chrome is not connected" while Chrome + native host are running | `list_connected_browsers` returns `[]` = the extension isn't paired to this account/session. Ask the user to open the Claude side panel in Chrome (signed in, click Connect), then `tabs_context_mcp` with `createIfEmpty: true` — earlier sessions' tab groups aren't visible |
+| "Browser automation is not connected" | Check the configured integration's connection and tab/session discovery. Reconnect using that integration's instructions; do not assume it has an extension or side panel. Tool names and session visibility vary by provider |
 | "Make tablet match desktop" by nudging the groups that hang off-canvas | Compare **end** positions (rest + scroll dx/dy) to desktop × 0.75; usually one group was enlarged and shoved the rest. Rescale every widget exactly — fonts per text run, picture `scale` not crop, animation dx/dy, `speed` for runway. See `references/rescale-breakpoint.md` |
 | "Tablet looks empty compared with desktop" | Portrait iPad shows ~2× the canvas height of a landscape desktop window. Scale to the widest must-keep element, spread the animated groups' end spots down, finish them all at one scroll distance, page height = that + 1105. See `references/rescale-breakpoint.md` |
 | "The stacked covers' edges look jagged on one breakpoint only" | Check the per-breakpoint `y` of every item in the stack: fractional values that differ by <1 px (e.g. −0.83 / −0.5 / −0.33) round to different pixel rows. Give every item (and the panel it lines up with) the identical `y` on that breakpoint, then zoom a screenshot on the edges |
@@ -175,16 +185,20 @@ stacked-covers scroll effect. `GETTING-STARTED.md` is the human guide
 
 **Keep this skill current:** at the end of every Readymag session, add each
 new engine fact or failure mode here or in a reference file, with how it was
-verified, and sync the project copy (`.claude/skills/readymag/` in the client
-folder) with the global one.
+verified, and sync any project-local copy (for example
+`.claude/skills/readymag/`, `.opencode/skills/readymag/`, or
+`.agents/skills/readymag/`) with the global one.
 
 ## Client-work protocol
 
-1. Work on a **duplicate** of the live project; never open the published one.
+1. Default to editing a **duplicate** of the live project. Read-only inspection
+   of the published site is fine; edit the original only with explicit user direction.
    Confirm which project ID you're in — editor copy ID ≠ published `num_id`.
 2. If the client folder has a `CONTEXT.md` / `CHANGELOG.md`, read them first —
    project-specific guardrails and undo data live there.
-3. Publishing (from grounded help-center docs): project settings → **Publish**
+3. Publish, republish, or change domains only within explicit user authorization;
+   do not request repeated approval for an already authorized operation.
+   Publishing (from grounded help-center docs): project settings → **Publish**
    (single click, returns a direct URL). After edits, **Republish**.
    **Protect with a password** (paid plans) in project settings for private
    client QA; keep Search-engine indexing off until go-live. Custom domain:
