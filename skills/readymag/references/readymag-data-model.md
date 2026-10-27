@@ -96,14 +96,15 @@ await page.save({viewport_tablet_portrait: v}, {patch: true});
 // "Fixed on all pages" lives in the Layers panel group order (drag to fix).
 ```
 
-Getting data out: printing large JSON truncates, and the JS-tool content
-guard blocks results containing cookie/query-string data (`viewport_*`
-objects embed screenshot URLs). Print scalar fields only, or download:
+Getting data out: large JSON output may truncate, and some integrations filter
+cookie/query-string data (`viewport_*` objects embed screenshot URLs). Use
+scalar summaries for inspection and a supported file export for backups.
+Where browser downloads are supported:
 
 ```js
 const a = document.createElement('a');
 a.href = URL.createObjectURL(new Blob([JSON.stringify(backup)]));
-a.download = 'backup.json'; a.click();   // lands in ~/Downloads
+a.download = 'backup.json'; a.click();   // locate and verify the file in your browser/tool download directory
 ```
 
 ## C. Animation objects

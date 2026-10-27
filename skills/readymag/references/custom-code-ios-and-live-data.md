@@ -1,6 +1,6 @@
 # Custom code, iPad/iPhone Safari, duplicates and live-site data
 
-Field notes from the Yasmeen Afifi project (Oct 2026). Each item was learned
+Field notes from a real client project (Oct 2026). Each item was learned
 from a real failure; the "verified" line says how.
 
 ## 1. Project custom code
