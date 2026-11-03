@@ -16,12 +16,32 @@ Core working principle: **read the project model for facts, verify with
 screenshots and real input.** Runtime DOM geometry lies (see Verification
 rules), and every editor mistake is expensive — assume there is no undo.
 
-This skill is agent-neutral. It needs an agent that can (a) load this
-`SKILL.md` and its `references/`, (b) drive a browser that is signed in to
-`my.readymag.com` and can run page JavaScript, take screenshots, and send
-real input for editing/verification, and (c) optionally drive an iOS
-Simulator. The skill does not install or grant that browser access; you
-provide it.
+## Using this skill in any agent
+
+Read this file, then load only the reference files needed for the task. Resolve
+reference paths relative to this skill folder. Use the tools available in the
+current agent; the examples describe Readymag operations, not required tool names.
+No particular model, plugin, browser extension, or slash command is required.
+
+Choose the workflow that matches the request:
+
+- **Explain a Readymag concept:** use these instructions; no browser or login needed.
+- **Audit a published site:** read the public page/model with available web tools.
+  Use browser screenshots and real input to verify appearance and interactions.
+  If those tools are unavailable, report the model findings and explicitly mark
+  visual and interaction checks as unverified.
+- **Edit a project:** use an authorized browser session signed in to
+  `my.readymag.com`. Page JavaScript supports model inspection and precise edits;
+  screenshots and real input support UI edits and verification. Use supported
+  operations only. If a required capability is missing, explain the specific
+  limitation and give manual steps for that part; continue independent work.
+- **Check iOS-specific behavior:** use a real device or an available iOS Simulator.
+  Desktop viewport resizing alone does not verify Safari or touch behavior.
+
+Before editing, identify the working project, page, and target layout from the
+request or session. Follow the backup and client-work guidance below. Report
+what changed, what was verified, and where the backup was saved. Installing or
+loading this skill does not configure browser access or authorize publishing.
 
 ## Settled engine facts
 
