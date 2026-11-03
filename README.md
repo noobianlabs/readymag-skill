@@ -9,20 +9,29 @@ All of it was learned on a real portfolio site (Aug–Oct 2026), and each rule
 records how it was checked. You don't have to read the skill, because your
 agent does. You describe the task in plain words.
 
-## Start here
+## Copy and paste into your agent
 
-1. Download this repository using **Code → Download ZIP**, or clone it.
-2. Keep the whole `skills/readymag` folder together, including `references/`.
-3. Give your agent the folder and paste this prompt (replace the path and task):
+Paste this whole message into your AI agent:
 
-> Read `/path/to/readymag/SKILL.md` and use its relevant reference files.
-> My task: explain why text on my Readymag site is invisible on iPad.
-> Tell me which checks you can perform with your available tools.
+```text
+Load the Readymag skill from:
+https://github.com/noobianlabs/readymag-skill
 
-This manual-loading method works with agents that can read local files. For an
-agent that only accepts attachments, attach `SKILL.md` and the reference files
-it needs; a repository URL alone does not guarantee that it can read them.
-For automatic discovery, use the installation paths below.
+Read skills/readymag/SKILL.md and load its reference files as needed.
+If you can use git, clone the repository into an unused local folder;
+otherwise read the files from GitHub. Confirm when the skill is loaded,
+then ask what I want to do with my Readymag site.
+If you cannot access the files, tell me what to download and attach.
+```
+
+Then describe your task—for example: **“Check my site on tablet and phone:
+[your site URL].”** No file paths or special commands to figure out.
+
+If your agent cannot access GitHub, click **Code → Download ZIP**, unzip it,
+and give the agent the `skills/readymag` folder or attach `SKILL.md` and the
+references it needs. Loading applies to the current conversation; for
+installation that persists across sessions, use the per-agent instructions
+[below](https://github.com/noobianlabs/readymag-skill#2-install-from-github).
 
 **Questions need no browser.** Auditing a URL needs web access; visual checks
 need browser control. Editing needs a browser session signed in to Readymag.
