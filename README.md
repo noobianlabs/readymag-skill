@@ -9,6 +9,25 @@ All of it was learned on a real portfolio site (Aug–Oct 2026), and each rule
 records how it was checked. You don't have to read the skill, because your
 agent does. You describe the task in plain words.
 
+## Start here
+
+1. Download this repository using **Code → Download ZIP**, or clone it.
+2. Keep the whole `skills/readymag` folder together, including `references/`.
+3. Give your agent the folder and paste this prompt (replace the path and task):
+
+> Read `/path/to/readymag/SKILL.md` and use its relevant reference files.
+> My task: explain why text on my Readymag site is invisible on iPad.
+> Tell me which checks you can perform with your available tools.
+
+This manual-loading method works with agents that can read local files. For an
+agent that only accepts attachments, attach `SKILL.md` and the reference files
+it needs; a repository URL alone does not guarantee that it can read them.
+For automatic discovery, use the installation paths below.
+
+**Questions need no browser.** Auditing a URL needs web access; visual checks
+need browser control. Editing needs a browser session signed in to Readymag.
+The skill provides instructions; configure browser tools separately.
+
 **What it helps with**
 
 - Text that shows on desktop but is **invisible on iPad or iPhone**
