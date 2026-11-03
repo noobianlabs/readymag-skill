@@ -3,20 +3,29 @@
 This folder teaches an AI agent how to inspect, troubleshoot, and edit Readymag
 sites. You describe the task; the agent reads the instructions.
 
-## Load it
+## Copy and paste into your agent
 
-Keep `SKILL.md` and `references/` together. Tell your agent:
+Paste this whole message into your AI agent:
 
-> Read `/path/to/readymag/SKILL.md` and use the relevant reference files.
-> Help me with this Readymag task: [describe what you want].
+```text
+Load the Readymag skill from:
+https://github.com/noobianlabs/readymag-skill
 
-Replace the path with the actual location of this folder. Ask the agent to
-confirm which file it loaded. If it accepts attachments instead of local files,
-attach `SKILL.md` and the references needed for your task.
+Read skills/readymag/SKILL.md and load its reference files as needed.
+If you can use git, clone the repository into an unused local folder;
+otherwise read the files from GitHub. Confirm when the skill is loaded,
+then ask what I want to do with my Readymag site.
+If you cannot access the files, tell me what to download and attach.
+```
 
-For automatic discovery and agent-specific installation paths, see the
-[repository instructions](https://github.com/noobianlabs/readymag-skill#2-install-from-github).
-No Claude plugin or special slash command is required for manual loading.
+Then describe your task—for example: **“Check my site on tablet and phone:
+[your site URL].”** No file paths or special commands to figure out.
+
+If your agent cannot access GitHub, click **Code → Download ZIP**, unzip it,
+and give the agent the `skills/readymag` folder or attach `SKILL.md` and the
+references it needs. Loading applies to the current conversation; for
+installation that persists across sessions, use the per-agent instructions
+[below](https://github.com/noobianlabs/readymag-skill#2-install-from-github).
 
 ## Try a task
 
